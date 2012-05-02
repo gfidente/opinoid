@@ -1,4 +1,4 @@
-h1. Opinoid.
+h1. Opinoid
 
 p. A web application intended to syndicate news from a number of known RSS/Atom sources and provide visitors with a sorted list (like Reddit) based on user's votes and comments. Opinoid is about news syndication, democratized.
 
@@ -78,4 +78,4 @@ wsgiref==0.1.2
 </pre>
 
 p. Use the -h flag when launching for some more argument options.
-p. An alpha version is available at http://alpha.opinoid.com (rather slow vps), please report issues and ideas.
+p. An alpha version is available at "alpha.opinoid.com":http://alpha.opinoid.com (rather slow vps), please report issues and ideas.
