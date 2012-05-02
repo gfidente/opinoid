@@ -1,0 +1,37 @@
+/* Custom
+-------------------------------------------------- */
+
+body { padding-top: 40px; padding-bottom: 40px; }
+
+textarea { resize: vertical; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
+
+div .indent { margin-left: 30px; }
+
+div .article { padding: 0 0 0 10px; border-left: 5px solid #eeeeee; font-size: 14px; }
+
+div .article small { display: block; line-height: 18px; color: #999999; font-size: 12px; }
+
+div .article small:before { content: '\2014 \00A0'; }
+
+div .comment { padding: 0 0 0 10px; font-size: 14px; }
+
+div .comment small { display: block; line-height: 18px; color: #999999; font-size: 12px; }
+
+div .comment small:before { content: '\2014 \00A0'; }
+
+div .footer { text-align: center; font-size: 10px; }
+
+img.sourcelogo { max-width: 112px; max-height: 32px; }
+
+/* Hacking bootstrap
+-------------------------------------------------- */
+
+.navbar .nav > li > span.likea {
+ float: none;
+ padding: 10px 0px 11px;
+ line-height: 19px;
+ color: #999999;
+ text-decoration: none;
+ text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+ display: block;
+}

@@ -1,0 +1,82 @@
+h1. Opinoid. News syndication, democratized.
+
+p. A web application intended to syndicate news from a number of known RSS/Atom sources and provide visitors with a sorted list (like Reddit) based on user's votes and comments.
+
+h2. Web Application
+
+p. The web application requires python >= 2.7 and few additional modules which you can set in a virtualenv:
+
+<code>
+$ pip freeze
+pep8==0.6.1
+pycurl==7.19.0
+pygeoip==0.2.2
+pymongo==2.0.1
+six==1.0.0
+textile==2.1.5
+tornado==2.1.1
+wsgiref==0.1.2
+</code>
+
+p. Before starting the application, check for the needed arguments:
+
+<code>
+$ ./opinoid.py --help
+Usage: ./opinoid.py [OPTIONS]
+
+Options:
+  --help                           show this help information
+  --log_file_max_size              max size of log files before rollover
+  --log_file_num_backups           number of log files to keep
+  --log_file_prefix=PATH           Path prefix for log files. Note that if you are running multiple tornado processes, log_file_prefix must be different for each of them (e.g. include the port number)
+  --log_to_stderr                  Send log output to stderr (colorized if possible). By default use stderr if --log_file_prefix is not set and no other logging is configured.
+  --logging=info|warning|error|none Set the Python log level. If 'none', tornado won't touch the logging configuration.
+./opinoid.py
+  --dbhost                         DB host
+  --dbpass                         DB pass
+  --dbport                         DB port
+  --dbuser                         DB user
+</code>
+
+h2. Utilities
+
+p. A collection of utilities intended mainly for use with the Opinoid web app.
+
+h3. init.mongo
+
+p. This is the db initialization file. It defines the list of feeds to be parsed also defining their country and category. Assuming your mongo database is running on localhost you can it use with:
+
+<code>
+$ mongo 127.0.0.1 < init.mongo
+</code>
+
+h3. populate.py
+
+p. This is a python batch job which connects to the feed sources, parses the contents and populates the db.
+
+<code>
+$ ./populate.py
+2012-04-06 14:15:02,164 INFO STARTED populate
+2012-04-06 14:15:02,165 INFO working on http://www.ilfattoquotidiano.it/feed/
+2012-04-06 14:15:03,396 INFO entries received 20, skipped 6, added 14
+[...]
+2012-04-06 14:15:16,024 INFO STARTED cleanup
+2012-04-06 14:15:16,025 INFO deleting articles older than 1331036102
+2012-04-06 14:15:16,029 INFO articles deleted 1, comments 0
+2012-04-06 14:15:16,029 INFO STARTED logrun
+2012-04-06 14:15:16,029 INFO last full run at 1333714502
+</code>
+
+p. It will work in any virtualenv providing the following:
+
+<code>
+$ pip freeze
+feedparser==5.0.1
+pep8==0.6.1
+pymongo==2.0.1
+tldextract==0.3.1
+wsgiref==0.1.2
+</code>
+
+p. Use the -h flag when launching for some more argument options.
+p. An alpha version is available at http://alpha.opinoid.com (rather slow vps), please report issues and ideas.

@@ -1,0 +1,14 @@
+{% set numposts = handler.mongoworker.get_numposts_by_user_oid(oid) %}
+<br /><br />
+<ul>
+ <li>{{ numposts }} comments posted</li>
+ <li>{{ handler.mongoworker.get_points_by_user_oid(oid) }} points collected</li>
+</ul>
+{% if numposts > 0 %}
+ <hr />
+ most voted/commented sources:
+ <br /><br />
+ <ul>
+  {% for k,v in handler.mongoworker.get_mostliked_by_user_oid(oid).items() %}<li>{{ k }} ({{ v }} articles)</li>{% end %}
+ </ul>
+{% end %}

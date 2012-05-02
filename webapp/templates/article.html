@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {% set feed = handler.mongoworker.get_feed_by_oid(article["feed_oid"]) %}
+ {{ article["title"] }}
+{% end %}
+
+{% block scripts %}
+ <script src="{{ static_url("js/article.js") }}" type="text/javascript"></script>
+{% end %}
+
+{% block welcome %}
+ <article id="{{ article["_id"] }}">
+  <h2>{{ article["title"] }}</h2>
+  <h6>seen on <a rel="tooltip" href="/source/{{ article["feed_oid"] }}" title="List articles from this source only">{{ feed["title"] }}</a> in {{ feed["category"] }}, <time class="timeago" datetime="{{ article["updated_iso8601"] }}">timeago</time>
+  (<a rel="tooltip" href="{{ article["link"] }}" title="Open article in a new tab" target="_blank">Full article</a>)</h6>
+ </article>
+{% end %}
+
+{% block heading %}
+ <div id="formatting-modal" class="modal hide fade">
+  <div class="modal-header">
+   <h3>Formatting Guide</h3>
+  </div>
+  <div class="modal-body">
+   You can apply some <a href="http://en.wikipedia.org/wiki/Textile_%28markup_language%29" target="_blank">textile</a> formatting to your comments. Here are some examples:<br /><br />
+   {% include "includes/formatting.html" %}
+  </div>
+  <div class="modal-footer">
+   <a href="#formatting-modal" class="btn btn-inverse" data-dismiss="modal">Dismiss</a>
+  </div>
+ </div>
+{% end %}
+
+{% block main %}
+ <span class="where_the_comments_render_for_{{ article["_id"] }}"></span>
+ <form id="form_for_{{ article["_id"] }}" class="form-vertical well">
+  <fieldset>
+   <textarea name="text" placeholder="Type your comment here" rows="3"></textarea>
+   <input type="hidden" name="parent_oid" value="{{ article["_id"] }}" />
+   {{ xsrf_form_html() }}
+   <div class="pull-right">
+    <a class="btn btn-small" data-toggle="modal" href="#formatting-modal">Textile</a>
+    <a class="btn btn-primary btn-small" href="javascript:post_form('{{ article["_id"] }}')">Submit</a>
+   </div>
+  </fieldset>
+ </form>
+{% end %}
+
+{% block notices %}
+{% end %}
+
+{% block thumbnails %}
+ <li class="span3">
+  <div class="thumbnail">
+   <div class="caption">
+    Most active users?
+   </div>
+  </div>
+ </li>
+ <li class="span3">
+  <div class="thumbnail">
+   <div class="caption">
+    Share widget
+   </div>
+  </div>
+ </li>
+ <li class="span3">
+  <div class="thumbnail">
+   <div class="caption">
+    A list of articles discussing the same topic?
+   </div>
+  </div>
+ </li>
+{% end %}
