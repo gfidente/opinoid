@@ -43,7 +43,7 @@ h3. utils
 
 p. A collection of utilities intended for use with the web app.
 
-h4. init.mongo
+h5. init.mongo
 
 p. This is the mongodb initialization file. It simply adds a short list of feed utls to be parsed, including their country and category for better categorization. Assuming your mongodb is running on localhost, you can do the initial population with:
 
@@ -51,7 +51,7 @@ p. This is the mongodb initialization file. It simply adds a short list of feed 
 $ mongo 127.0.0.1 < init.mongo
 </pre>
 
-h4. populate.py
+h5. populate.py
 
 p. This is a python batch job which parses the feeds contents and populates the db.
 
