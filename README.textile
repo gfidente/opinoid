@@ -2,7 +2,7 @@ h1. Opinoid
 
 p. A web application intended to syndicate news from a number of known RSS/Atom sources and provide visitors with a sorted list (like Reddit) based on user's votes and comments. Opinoid is news syndication, democratized.
 
-h2. webapp
+h3. webapp
 
 p. The web application requires python >= 2.7 and few additional modules which you can setup in a virtualenv:
 
@@ -39,7 +39,7 @@ Options:
 
 p. A mongodb instance is required to permanently store the app data.
 
-h2. utils
+h3. utils
 
 p. A collection of utilities intended for use with the web app.
 
