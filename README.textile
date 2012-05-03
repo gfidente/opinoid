@@ -1,86 +1,11 @@
-h1. Opinoid
+h2. Introduction
 
-p. A web application intended to syndicate news from a number of known RSS/Atom sources and provide visitors with a sorted list (like Reddit) based on user's votes and comments. Opinoid is news syndication, democratized.
+p. A web application which syndicates news from a set of known RSS/Atom sources and provide visitors with a sorted list of articles (like Reddit) based on user's votes and comments.
 
-h3. webapp
-
-p. The web application requires python >= 2.7 and few additional modules which you can setup in a virtualenv:
-
-<pre>
-$ pip freeze
-pep8==0.6.1
-pycurl==7.19.0
-pygeoip==0.2.2
-pymongo==2.0.1
-six==1.0.0
-textile==2.1.5
-tornado==2.1.1
-wsgiref==0.1.2
-</pre>
-
-p. Before starting, check for the needed arguments:
-
-<pre>
-$ ./opinoid.py --help
-Usage: ./opinoid.py [OPTIONS]
-
-Options:
-  --help                           show this help information
-  --log_file_max_size              max size of log files before rollover
-  --log_file_num_backups           number of log files to keep
-  --log_file_prefix=PATH           Path prefix for log files. Note that if you are running multiple tornado processes, log_file_prefix must be different for each of them (e.g. include the port number)
-  --log_to_stderr                  Send log output to stderr (colorized if possible). By default use stderr if --log_file_prefix is not set and no other logging is configured.
-  --logging=info|warning|error|none Set the Python log level. If 'none', tornado won't touch the logging configuration.
-  --dbhost                         DB host
-  --dbpass                         DB pass
-  --dbport                         DB port
-  --dbuser                         DB user
-</pre>
-
-p. A mongodb instance is required to permanently store the app data.
-
-h3. utils
-
-p. A collection of utilities intended for use with the web app.
-
-h5. init.mongo
-
-p. This is the mongodb initialization file. It simply adds a short list of feed utls to be parsed, including their country and category for better categorization. Assuming your mongodb is running on localhost, you can do the initial population with:
-
-<pre>
-$ mongo 127.0.0.1 < init.mongo
-</pre>
-
-h5. populate.py
-
-p. This is a python batch job which parses the feeds contents and populates the db.
-
-<pre>
-$ ./populate.py
-2012-04-06 14:15:02,164 INFO STARTED populate
-2012-04-06 14:15:02,165 INFO working on http://www.ilfattoquotidiano.it/feed/
-2012-04-06 14:15:03,396 INFO entries received 20, skipped 6, added 14
-[...]
-2012-04-06 14:15:16,024 INFO STARTED cleanup
-2012-04-06 14:15:16,025 INFO deleting articles older than 1331036102
-2012-04-06 14:15:16,029 INFO articles deleted 1, comments 0
-2012-04-06 14:15:16,029 INFO STARTED logrun
-2012-04-06 14:15:16,029 INFO last full run at 1333714502
-</pre>
-
-p. It will work with any python2 version providing the following modules:
-
-<pre>
-$ pip freeze
-feedparser==5.0.1
-pep8==0.6.1
-pymongo==2.0.1
-tldextract==0.3.1
-wsgiref==0.1.2
-</pre>
-
-p. This also offers a --h flag for some more arguments.
+p. Requires python >= 2.7 and few additional modules you could setup in a virtualenv.
 
 h2. Get involved
 
-p. An alpha version is available at "alpha.opinoid.com":http://alpha.opinoid.com (but is hosted on a rather slow vps), please report issues and ideas here on github!
+p. Check for some deployment instructions in the "Deployment Guide":https://github.com/giulivo/opinoid/wiki/Deployment-Guide
+
+p. An alpha version is available online at "alpha.opinoid.com":http://alpha.opinoid.com (hosted on a rather slow vps), please report issues and ideas here on github!
