@@ -1,10 +1,10 @@
 h1. Opinoid
 
-p. A web application intended to syndicate news from a number of known RSS/Atom sources and provide visitors with a sorted list (like Reddit) based on user's votes and comments. Opinoid is about news syndication, democratized.
+p. A web application intended to syndicate news from a number of known RSS/Atom sources and provide visitors with a sorted list (like Reddit) based on user's votes and comments. Opinoid is news syndication, democratized.
 
-h2. Web Application
+h2. webapp
 
-p. The web application requires python >= 2.7 and few additional modules which you can set in a virtualenv:
+p. The web application requires python >= 2.7 and few additional modules which you can setup in a virtualenv:
 
 <pre>
 $ pip freeze
@@ -18,7 +18,7 @@ tornado==2.1.1
 wsgiref==0.1.2
 </pre>
 
-p. Before starting the application, check for the needed arguments:
+p. Before starting, check for the needed arguments:
 
 <pre>
 $ ./opinoid.py --help
@@ -37,21 +37,23 @@ Options:
   --dbuser                         DB user
 </pre>
 
+p. A mongodb instance is required to permanently store the app data.
+
 h2. Utilities
 
-p. A collection of utilities intended mainly for use with the Opinoid web app.
+p. A collection of utilities intended for use with the web app.
 
-h3. init.mongo
+h4. init.mongo
 
-p. This is the db initialization file. It defines the list of feeds to be parsed also defining their country and category. Assuming your mongo database is running on localhost you can it use with:
+p. This is the mongodb initialization file. It simply adds a short list of feed utls to be parsed, including their country and category for better categorization. Assuming your mongodb is running on localhost, you can do the initial population with:
 
 <pre>
 $ mongo 127.0.0.1 < init.mongo
 </pre>
 
-h3. populate.py
+h4. populate.py
 
-p. This is a python batch job which connects to the feed sources, parses the contents and populates the db.
+p. This is a python batch job which parses the feeds contents and populates the db.
 
 <pre>
 $ ./populate.py
@@ -66,7 +68,7 @@ $ ./populate.py
 2012-04-06 14:15:16,029 INFO last full run at 1333714502
 </pre>
 
-p. It will work in any virtualenv providing the following:
+p. It will work with any python2 version providing the following modules:
 
 <pre>
 $ pip freeze
@@ -77,6 +79,8 @@ tldextract==0.3.1
 wsgiref==0.1.2
 </pre>
 
-p. Use the -h flag when launching for some more argument options.
+p. This also offers a --h flag for some more arguments.
 
-p. An alpha version is available at "alpha.opinoid.com":http://alpha.opinoid.com (rather slow vps), please report issues and ideas.
+h2. Get involved
+
+p. An alpha version is available at "alpha.opinoid.com":http://alpha.opinoid.com (but is hosted on a rather slow vps), please report issues and ideas here on github!
