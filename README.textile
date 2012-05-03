@@ -39,7 +39,7 @@ Options:
 
 p. A mongodb instance is required to permanently store the app data.
 
-h2. Utilities
+h2. utils
 
 p. A collection of utilities intended for use with the web app.
 
