@@ -40,7 +40,7 @@ def main(dbhost, dbport, dbuser, dbpass):
  db = connection.opinoid
  db.authenticate(dbuser, dbpass)
  populate(db, wtin)
- #cleanup(db, wtin)
+ cleanup(db, wtin)
  logrun(db, wtin)
  connection.disconnect()
 
@@ -86,14 +86,14 @@ def populate(db, wtin):
   added = 0
   skipped = 0
   for entry in feed_parsed.entries:
-   entry_updated = int(timegm(entry["updated_parsed"])) if "updated_parsed" in entry.keys() else 1
+   entry_updated = int(timegm(entry["published_parsed"])) if "published_parsed" in entry.keys() else 1
    logging.debug("entry_updated is now set to %s", entry_updated)
    if entry_updated > last_updated:
     logging.debug("adding %s", entry.link)
     entry_title = sub(r'<.*>', '', entry.title)
     if entry_title.strip() == "":
       continue
-    articles.insert({"title": entry_title, "link": entry.link, "updated": entry_updated, "updated_iso8601": strftime("%Y-%m-%dT%H:%M:%SZ", entry["updated_parsed"]), "feed_oid": str(feed_oid), "score": 100, "score_updated": wtin, "comments": 0})
+    articles.insert({"title": entry_title, "link": entry.link, "updated": entry_updated, "updated_iso8601": strftime("%Y-%m-%dT%H:%M:%SZ", entry["published_parsed"]), "feed_oid": str(feed_oid), "score": 100, "score_updated": wtin, "comments": 0})
     added = added + 1
    else:
     logging.debug("skipping %s, entry should be already on db", entry.link)
