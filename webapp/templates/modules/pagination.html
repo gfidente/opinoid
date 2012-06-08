@@ -1,0 +1,7 @@
+<div class="btn-group pull-right">
+  <a class="btn btn-small {% if int(pd) == 0 %}disabled{% end %}" href="?pd=0">Today</a>
+  {% for d in range(1, 7) %}
+   <a class="btn btn-small {% if int(pd) == d %}active{% end %}" href="?pd={{ d }}">{{ d }}</a>
+  {% end %}
+  <a class="btn btn-primary btn-small disabled">Days ago</a>
+</div>

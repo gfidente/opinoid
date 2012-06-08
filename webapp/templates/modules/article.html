@@ -1,0 +1,36 @@
+{% set feed = handler.mongoworker.get_feed_by_oid(article["feed_oid"]) %}
+<article id="{{ article["_id"] }}" class="{{ feed["category"] }}">
+ <table style="width: 100%;">
+  <tbody>
+   <tr>
+    <td style="text-align: center; vertical-align: top; width: 20px;">
+     <span class="where_the_arrow_renders_for_{{ article["_id"] }}" style="font-size: 14px;">
+      {% if not article.has_key("watchers") or handler.get_current_user() not in article["watchers"] %}
+       <a href="javascript:voteup('{{ article["_id"] }}');">&uarr;</a>
+      {% else %}
+       &times;
+      {% end %}
+     </span>
+     <br />
+     <span class="where_the_score_renders_for_{{ article["_id"] }}" style="font-size: 14px;">
+      {{ int(article["score"])/10-10 }}
+     </span>
+    </td>
+    <td>
+     <div class="article">
+      <div class="pull-right">
+       {% if feed.has_key("image_href") %}<img class="sourcelogo" src="{{ feed["image_href"] }}" alt="{{ feed["title"] }}" />{% end %}
+      </div>
+      <a href="{{ article["link"] }}" target="_blank">{{ article["title"] }}</a>
+      <small>
+       seen on <a rel="tooltip" href="/source/{{ article["feed_oid"] }}" title="List articles from this source only">{{ feed["title"] }}</a> in {{ feed["category"] }}, <time class="timeago" datetime="{{ article["updated_iso8601"] }}">timeago</time> /
+       <a rel="tooltip" href="/article/{{ article["_id"] }}" title="Follow discussion">{{ article["comments"]}} comments</a>
+       {% if handler.application.settings["debug"] %} - [H {{ article["hotness"] }}]{% end %}
+      </small>
+     </div>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <hr />
+</article>

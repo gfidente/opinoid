@@ -1,0 +1,37 @@
+{% if comments %}
+<div class="">
+{% for comment in sorted(comments, key=lambda a: a["hotness"], reverse=True) %}
+ {% module Comment(comment) %}
+ <div class="indent">
+ {% for comment in sorted(comment["replies"], key=lambda a: a["hotness"], reverse=True) %}
+  {% module Comment(comment) %}
+  <div class="indent">
+  {% for comment in sorted(comment["replies"], key=lambda a: a["hotness"], reverse=True) %}
+   {% module Comment(comment) %}
+   <div class="indent">
+   {% for comment in sorted(comment["replies"], key=lambda a: a["hotness"], reverse=True) %}
+    {% module Comment(comment) %}
+    <div class="indent">
+    {% for comment in sorted(comment["replies"], key=lambda a: a["hotness"], reverse=True) %}
+     {% module Comment(comment) %}
+     <div class="indent">
+     {% for comment in sorted(comment["replies"], key=lambda a: a["hotness"], reverse=True) %}
+      {% module Comment(comment) %}
+     {% end %}
+     </div>
+    {% end %}
+    </div>
+   {% end %}
+   </div>
+  {% end %}
+  </div>
+ {% end %}
+ </div>
+{% end %}
+</div>
+{% else %}
+<div class="alert alert-info">
+ <a class="close" data-dismiss="alert">&times;</a>
+ No comments yet, please go on and post the first!
+</div>
+{% end %}

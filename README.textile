@@ -1,0 +1,11 @@
+h2. Introduction
+
+p. A web application which syndicates news from a set of known RSS/Atom sources and provide visitors with a sorted list of articles (like Reddit) based on user's votes and comments.
+
+p. Requires python >= 2.7 and few additional modules you could setup in a virtualenv.
+
+h2. Get involved
+
+p. Check for some deployment instructions in the "Deployment Guide":https://github.com/giulivo/opinoid/wiki/Deployment-Guide
+
+p. An alpha version is available online at "alpha.opinoid.com":http://alpha.opinoid.com (hosted on a rather slow vps), please report issues and ideas here on github!

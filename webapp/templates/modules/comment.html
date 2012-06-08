@@ -1,0 +1,52 @@
+<table>
+ <tbody>
+  <tr>
+   <td style="text-align: center; vertical-align: top; width: 20px;">
+    <span class="where_the_arrow_renders_for_{{ comment["_id"] }}" style="font-size: 14px;">
+     {% if not comment.has_key("watchers") or handler.get_current_user() not in comment["watchers"] %}
+      <a href="javascript:voteup('{{ comment["_id"] }}');">&uarr;</a>
+     {% else %}
+      &times;
+     {% end %}
+    </span>
+    <br />
+    <span class="where_the_score_renders_for_{{ comment["_id"] }}" style="font-size: 14px;">
+     {{ int(comment["score"])/10-10 }}
+    </span>
+   </td>
+   <td>
+    <div class="comment">
+     {{ comment["text"] }}
+     <small>
+      by <a rel="tooltip" href="/user/{{ comment["submitter"] }}" title="Brings you to the user's stats page">{{ comment["user_name"] }}</a> <time class="timeago" datetime="{{ comment["updated_iso8601"] }}">timeago</time> /
+      {% if not cite %}
+       {% if comment.has_key("user_profile_url") %}<a rel="tooltip" href="{{ comment["user_profile_url"] }}" title="Open Facebook or Google public profile in a new tab" target="_blank">public profile</a> /{% end %}
+       <a rel="tooltip" href="javascript:toggleReply('{{ comment["_id"] }}')" title="Post a reply to this comment">reply</a>
+      {% else %}
+       on <a rel="tooltip" href="/article/{{ comment["article_oid"] }}" title="Follow discussion in a new tab">{{ handler.mongoworker.get_article_by_oid(comment["article_oid"])["title"] }}</a>
+      {% end %}
+      {% if handler.application.settings["debug"] %} - [H {{ comment["hotness"] }}]{% end %}
+     </small>
+    </div>
+   </td>
+  </tr>
+ </tbody>
+</table>
+<hr />
+
+{% if not cite %}
+ <div class="where_the_form_render_for_{{ comment["_id"] }} hide indent">
+  <form id="form_for_{{ comment["_id"] }}" class="form-vertical well">
+   <fieldset>
+    <textarea name="text" placeholder="Type your reply here" rows="2"></textarea>
+    <input type="hidden" name="parent_oid" value="{{ comment["_id"] }}" />
+    {{ xsrf_form_html() }}
+    <div class="pull-right">
+     <a class="btn btn-small" data-toggle="modal" href="#formatting-modal">Textile</a>
+     <a class="btn btn-primary btn-small" href="javascript:post_form('{{ comment["_id"] }}')">Submit</a>
+    </div>
+   </fieldset>
+  </form>
+  <hr />
+ </div>
+{% end %}

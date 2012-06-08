@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {{ country }}
+{% end %}
+
+{% block scripts %}
+ <script src="{{ static_url("js/country.js") }}" type="text/javascript"></script>
+{% end %}
+
+{% block heading %}
+ <div class="btn-group" data-toggle="buttons-radio">
+  <a class="btn btn-primary btn-small disabled">Categories</a>
+  <a id="allbtn" href="javascript:switch_category()" class="btn btn-small active">everything</a>
+  {% for elem in handler.mongoworker.get_categories() %}
+   <a href="javascript:switch_category('{{ elem }}')" class="btn btn-small">{{ elem }}</a>
+  {% end %}
+ </div>
+ <hr />
+{% end %}
+
+{% block main %}
+ <div id="filterwarning" class="hide">
+  <div class="alert">
+   This list is filtered by the criteria in the top right search box. &nbsp;<a href="javascript:clear_search_box();">Reset the filter</a> to see them all!
+  </div>
+ </div>
+ <div id="articleslist">
+  {% for article in sorted(articles, key=lambda a: a["hotness"], reverse=True) %}
+   {% module Article(article) %}
+  {% end %}
+ </div>
+ {% module Pagination(pd) %}
+{% end %}
+
+{% block notices %}
+ <!-- categories -->
+ <div class="accordion" id="categories-accordion">
+  <div class="accordion-group">
+   <div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#categories-accordion" href="#categories">Listing news from {{ country }}</a>
+   </div>
+   <div id="categories" class="accordion-body collapse in">
+    <div class="accordion-inner">
+     <ul class="nav nav-pills">
+      {% for elem in handler.mongoworker.get_countries() %}
+       {% if elem != country %}
+        <li><a href="/country/{{ elem }}">{{ elem }}</a></li>
+       {% else %}
+        <li class="active"><a href="/country/{{ elem }}">{{ elem }}</a></li>
+       {% end %}
+      {% end %}
+     </ul>
+    </div>
+   </div>
+  </div>
+ </div>
+{% end %}
+
+{% block thumbnails %}
+ <li class="span3">
+  <div class="thumbnail">
+   <div class="caption">
+    Updated <time class="timeago" datetime="{{ handler.mongoworker.get_last_full_run() }}">timeago</time>, sorted by hotness.
+   </div>
+  </div>
+ </li>
+ <li class="span3">
+  <div class="thumbnail">
+   <div class="caption">
+    Feeds sourced for this country:
+    <br /><br />
+    <ul>
+    {% for source in handler.mongoworker.get_feeds_by_country(country, unique_titles=True) %}{% if source.has_key("title") %}<li>{{ source["title"] }}</li>{% end %}{% end %}</ul>
+   </div>
+  </div>
+ </li>
+{% end %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {% set feed = handler.mongoworker.get_feed_by_oid(oid) %}
+ {{ feed["title"] }}
+{% end %}
+
+{% block scripts %}
+ <script src="{{ static_url("js/source.js") }}" type="text/javascript"></script>
+{% end %}
+
+{% block welcome %}
+ <h2>Articles from {{ feed["title"] }}</h2>
+ <h6>Sorted by hotness.</h6>
+{% end %}
+
+{% block heading %}
+{% end %}
+
+{% block main %}
+ <div id="filterwarning" class="hide">
+  <div class="alert">
+   This list is filtered by the criteria in the top right search box. &nbsp;<a href="javascript:clear_search_box();">Reset the filter</a> to see them all!
+  </div>
+ </div>
+ <div id="articleslist">
+  {% for article in sorted(articles, key=lambda a: a["hotness"], reverse=True) %}
+   {% module Article(article) %}
+  {% end %}
+ </div>
+ {% module Pagination(pd) %}
+{% end %}
+
+{% block notices %}
+{% end %}
+
+{% block thumbnails %}
+ <li class="span3">
+  <div class="thumbnail">
+   <div class="caption">
+    Updated <time class="timeago" datetime="{{ handler.mongoworker.get_last_full_run() }}">timeago</time>, sorted by hotness.
+   </div>
+  </div>
+ </li>
+ <li class="span3">
+  <div class="thumbnail">
+   <div class="caption">
+    Categories collected from this source:
+    <br /><br />
+    <ul>
+     {% for category in handler.mongoworker.get_categories_by_feed_title(feed["title"]) %}
+      <li>{{ category }}</li>
+     {% end %}
+    </ul>
+   </div>
+  </div>
+ </li>
+{% end %}
