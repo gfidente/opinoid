@@ -35,6 +35,7 @@ import argparse
 
 def main(dbhost, dbport, dbuser, dbpass):
  wtin = int(time())
+ logging.info("current time %s", wtin)
  connection = Connection(dbhost, dbport)
  db = connection.opinoid
  db.authenticate(dbuser, dbpass)
