@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 #
+import os
+
+here = os.path.dirname(os.path.abspath(__file__))
+os.environ['PYTHON_EGG_CACHE'] = os.path.join(here, '..', 'misc/virtenv/lib/python2.6/site-packages')
+virtualenv = os.path.join(here, '..', 'misc/virtenv/bin/activate_this.py')
+execfile(virtualenv, dict(__file__=virtualenv))
+
 # feed parser
 from feedparser import parse
 
