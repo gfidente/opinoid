@@ -248,7 +248,7 @@ settings = {
  "autoescape": None,
  "facebook_api_key": "",
  "facebook_secret": "",
- "debug": False
+ "debug": True
 }
 
 application = tornado.web.Application(handlers, **settings)
