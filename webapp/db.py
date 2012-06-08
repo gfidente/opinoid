@@ -9,7 +9,7 @@ from time import time, gmtime, strftime
 from math import exp
 
 # performance
-from collections import Counter
+import Counter
 
 # EU Member States (exluding countries added in 2004 and later) + US +  Canada
 countries = ["US", "CDN", "UK", "DE", "FR", "IT", "ES", "NL", "GR", "SE", "DK", "FI", "IE", "PT", "BE", "A"]
