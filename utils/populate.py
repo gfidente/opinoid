@@ -51,6 +51,7 @@ def populate(db, wtin):
  for feed in feeds.find():
   logging.info("working on %s", feed["url"])
   feed_oid = feed["_id"]
+  logging.info("id %s", feed["_id"])
   feed_changes = {}
 
   # parsing
