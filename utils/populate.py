@@ -40,7 +40,7 @@ def main(dbhost, dbport, dbuser, dbpass):
  db = connection.opinoid
  db.authenticate(dbuser, dbpass)
  populate(db, wtin)
- cleanup(db, wtin)
+ #cleanup(db, wtin)
  logrun(db, wtin)
  connection.disconnect()
 
