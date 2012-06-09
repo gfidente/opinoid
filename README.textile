@@ -1,11 +1,12 @@
 h2. Introduction
 
-p. A web application which syndicates news from a set of known RSS/Atom sources and provide visitors with a sorted list of articles (like Reddit) based on user's votes and comments.
+p. Opinoid is a simple web application which syndicates news from a set of known RSS/Atom sources and provides visitors with a sorted list of articles (like Reddit), based on user's votes and comments. It uses Tornado:http://www.tornadoweb.org , MongoDB:http://www.mongodb.org and jQuery:http://jquery.com
 
-p. Requires python >= 2.7 and few additional modules you could setup in a virtualenv.
+p. Requires python >= 2.6 plus few additional modules you could setup in a virtualenv. If using python >= 2.7 you don't need of Counter.py and don't need to install argparse in the virtualenv.
 
 h2. Get involved
 
 p. Check for some deployment instructions in the "Deployment Guide":https://github.com/giulivo/opinoid/wiki/Deployment-Guide
 
-p. An alpha version is available online at "alpha.opinoid.com":http://alpha.opinoid.com (hosted on a rather slow vps), please report issues and ideas here on github!
+p. A live version is pushed online at "alpha.opinoid.com":http://alpha.opinoid.com (currently hosted on "OpenShift":http://openshift.redh
+at.com , backup url "opinoid-gfidente.rhcloud.com":http://opinoid-gfidente.rhcloud.com). Please report issues and ideas here on github!
