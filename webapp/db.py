@@ -274,7 +274,7 @@ class MongoWorker:
   results = articles.map_reduce(map, reduce, "mroutput", query={"watchers": oid})
   mostliked = {}
   if results:
-   for line in results:
+   for line in results.find():
     feed = self.get_feed_by_oid(line["_id"])
     mostliked[feed["title"]] = line["value"]
   return mostliked
