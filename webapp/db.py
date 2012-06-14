@@ -8,8 +8,8 @@ from time import time, gmtime, strftime
 # hotness
 from math import exp
 
-# performance
-import Counter
+# pymongo mapreduce
+from bson.code import Code
 
 # EU Member States (exluding countries added in 2004 and later) + US +  Canada
 countries = ["US", "CDN", "UK", "DE", "FR", "IT", "ES", "NL", "GR", "SE", "DK", "FI", "IE", "PT", "BE", "A"]
@@ -261,13 +261,20 @@ class MongoWorker:
 
  def get_mostliked_by_user_oid(self, oid):
   articles = self.db.articles
-  entries = []
-  for entry in articles.find({"watchers": oid}):
-   entries.append(entry["feed_oid"])
+  map = Code("function() {"
+             "  emit(this.feed_oid, 1);"
+             "}")
+  reduce = Code("function (key, values) {"
+                "  var total = 0;"
+                "  for (var i = 0; i < values.length; i++) {"
+                "    total += values[i];"
+                "  }"
+                "  return total;"
+                "}")
+  results = articles.map_reduce(map, reduce, "mroutput", query={"watchers": oid})
   mostliked = {}
-  if entries:
-   counter = Counter(entries).most_common(5)
-   for k in counter:
-    feed = self.get_feed_by_oid(k[0])
-    mostliked[feed["title"]] = k[1]
+  if results:
+   for line in results:
+    feed = self.get_feed_by_oid(line["_id"])
+    mostliked[feed["title"]] = line["value"]
   return mostliked
