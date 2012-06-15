@@ -1,8 +1,8 @@
 h2. Introduction
 
-p. Opinoid is a simple web application which syndicates news from a set of known RSS/Atom sources and provides visitors with a sorted list of articles (like Reddit), based on user's votes and comments. It uses Tornado:http://www.tornadoweb.org , MongoDB:http://www.mongodb.org and jQuery:http://jquery.com
+p. Opinoid is a simple web application which syndicates news from a set of known RSS/Atom sources and provides visitors with a sorted list of articles (like Reddit), based on user's votes and comments. It uses "TornadoWeb":http://www.tornadoweb.org , "MongoDB":http://www.mongodb.org , "jQuery":http://jquery.com and "Bootstrap":http://twitter.github.com/bootstrap/
 
-p. Requires python >= 2.6 plus few additional modules you could setup in a virtualenv. If using python >= 2.7 you don't need of Counter.py and don't need to install argparse in the virtualenv.
+p. Requires python >= 2.6 If using python >= 2.7 you don't need to install the argparse module in your virtualenv.
 
 h2. Get involved
 
