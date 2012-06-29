@@ -2,13 +2,91 @@ h2. Introduction
 
 p. Opinoid is a simple web application which syndicates news from a set of known RSS/Atom sources and provides visitors with a sorted list of articles (like Reddit), based on user's votes and comments. It uses "TornadoWeb":http://www.tornadoweb.org/, "MongoDB":http://www.mongodb.org/, "jQuery":http://jquery.com/ and "Bootstrap":http://twitter.github.com/bootstrap/.
 
-p. Requires python >= 2.6; if using python >= 2.7 you don't need to install the argparse module in your virtualenv.
+p. A live version is available at "alpha.opinoid.com":http://alpha.opinoid.com (hosted on "OpenShift":http://openshift.redhat.com/). Please report issues and ideas here on github!
 
-h2. Get involved
+h2. Hacking
 
-p. If you're looking for some more technical details please check the "hacking guide":https://github.com/giulivo/opinoid/wiki/Hacking-Guide and you'll find them.
+p. The web app file are in the <code>webapp</code> folder, some additional utilities are in the <code>utils</code> folder. The utils initialize the db and and update the list of articles periodically.
 
-p. A live version should be always available at "alpha.opinoid.com":http://alpha.opinoid.com (hosted on "OpenShift":http://openshift.redhat.com/). Please report issues and ideas here on github!
+h5. webapp
+
+p. The python modules required to get the web app running:
+
+<pre>
+$ pip freeze
+pep8==0.6.1
+pycurl==7.19.0
+pygeoip==0.2.2
+pymongo==2.0.1
+six==1.0.0
+textile==2.1.5
+tornado==2.1.1
+wsgiref==0.1.2
+</pre>
+
+p. If you're using python <= 2.6 you will also need to install the <code>argparse</code> module. You'll also need a working install of mongodb.
+
+<pre>
+$ ./opinoid.py --help
+Usage: ./opinoid.py [OPTIONS]
+
+Options:
+  --help                           show this help information
+  --log_file_max_size              max size of log files before rollover
+  --log_file_num_backups           number of log files to keep
+  --log_file_prefix=PATH           Path prefix for log files. Note that if you are running multiple tornado processes, log_file_prefix must be different for each of them (e.g. \
+include the port number)
+  --log_to_stderr                  Send log output to stderr (colorized if possible). By default use stderr if --log_file_prefix is not set and no other logging is configured.
+  --logging=info|warning|error|none Set the Python log level. If 'none', tornado won't touch the logging configuration.
+  --dbhost                         DB host
+  --dbpass                         DB pass
+  --dbport                         DB port
+  --dbuser                         DB user
+</pre>
+
+p. You will need to run such a *populate.py* script at least once, before starting the web app, to populate the db. We suggest you to set a cronjob to spawn it hourly.
+
+<pre>
+15 * * * * /home/release/virtualenv/bin/python /home/release/opinoid/utils/populate.py >> /tmp/populate.log 2>&1
+</pre>
+
+h5. utils/populate.py
+
+p. A python script which parses the feeds and populates the db accordingly.
+
+<pre>
+$ ./populate.py
+2012-04-06 14:15:02,164 INFO STARTED populate
+2012-04-06 14:15:02,165 INFO working on http://www.ilfattoquotidiano.it/feed/
+2012-04-06 14:15:03,396 INFO entries received 20, skipped 6, added 14
+[...]
+2012-04-06 14:15:16,024 INFO STARTED cleanup
+2012-04-06 14:15:16,025 INFO deleting articles older than 1331036102
+2012-04-06 14:15:16,029 INFO articles deleted 1, comments 0
+2012-04-06 14:15:16,029 INFO STARTED logrun
+2012-04-06 14:15:16,029 INFO last full run at 1333714502
+</pre>
+
+p. It will work with any python2 version providing the following modules:
+
+<pre>
+$ pip freeze
+feedparser==5.0.1
+pep8==0.6.1
+pymongo==2.0.1
+tldextract==0.3.1
+wsgiref==0.1.2
+</pre>
+
+p. populate.py also provides a --h flag to specify some additional options.
+
+h5. utils/init.mongo
+
+p. This is the mongodb initialization file. It simply adds a short list of urls (feeds) to be parsed, including their country and category for better categorization. Assuming your mongodb is running on localhost, you can do the initial population with:
+
+<pre>
+$ mongo 127.0.0.1 < init.mongo
+</pre>
 
 h2. License
 
