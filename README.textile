@@ -1,11 +1,22 @@
 h2. Introduction
 
-p. Opinoid is a simple web application which syndicates news from a set of known RSS/Atom sources and provides visitors with a sorted list of articles (like Reddit), based on user's votes and comments. It uses "TornadoWeb":http://www.tornadoweb.org , "MongoDB":http://www.mongodb.org , "jQuery":http://jquery.com and "Bootstrap":http://twitter.github.com/bootstrap/
+p. Opinoid is a simple web application which syndicates news from a set of known RSS/Atom sources and provides visitors with a sorted list of articles (like Reddit), based on user's votes and comments. It uses "TornadoWeb":http://www.tornadoweb.org , "MongoDB":http://www.mongodb.org , "jQuery":http://jquery.com and "Bootstrap":http://twitter.github.com/bootstrap/ .
 
-p. Requires python >= 2.6 If using python >= 2.7 you don't need to install the argparse module in your virtualenv.
+p. Requires python >= 2.6; if using python >= 2.7 you don't need to install the argparse module in your virtualenv.
 
 h2. Get involved
 
-p. Check for some deployment instructions in the "Deployment Guide":https://github.com/giulivo/opinoid/wiki/Deployment-Guide
+p. Check for some deployment instructions in the "Deployment Guide":https://github.com/giulivo/opinoid/wiki/Deployment-Guide .
 
 p. A live version is pushed online at "alpha.opinoid.com":http://alpha.opinoid.com (currently hosted on "OpenShift":http://openshift.redhat.com , backup url "opinoid-gfidente.rhcloud.com":http://opinoid-gfidente.rhcloud.com). Please report issues and ideas here on github!
+
+h3. License and Copyright
+
+p. Opinoid is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+p. Opinoid is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+
+p. You should have received a copy of the GNU Affero General Public License along with Opinoid. If not, see <http://www.gnu.org/licenses/>.
+
+p. Copyright (C) 2012 Giulio Fidente
