@@ -1,7 +1,11 @@
 /* Custom
 -------------------------------------------------- */
 
-body { padding-top: 40px; padding-bottom: 40px; }
+body { padding-top: 40px; padding-bottom: 40px; font-family: Quantico; }
+
+p { font-family: Quantico; }
+
+input,button,select,textarea{ font-family: Quantico; }
 
 textarea { resize: vertical; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
 
