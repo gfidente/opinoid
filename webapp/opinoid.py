@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 #
-# openshift diy env
+# generic
 import os
-here = os.path.dirname(os.path.abspath(__file__))
-os.environ['PYTHON_EGG_CACHE'] = os.path.join(here, '..', 'misc/virtenv/lib/python2.6/site-packages')
-virtualenv = os.path.join(here, '..', 'misc/virtenv/bin/activate_this.py')
-execfile(virtualenv, dict(__file__=virtualenv))
 
 # tornado requirements
 import tornado.httpserver
@@ -256,9 +252,9 @@ application = tornado.web.Application(handlers, **settings)
 
 def main():
  tornado.options.parse_command_line()
- address = os.environ['OPENSHIFT_INTERNAL_IP']
- port = os.environ['OPENSHIFT_INTERNAL_PORT']
  http_server = tornado.httpserver.HTTPServer(application, xheaders=True)
+ address = "0.0.0.0"
+ port = 8888
  http_server.listen(port, address=address)
  tornado.ioloop.IOLoop.instance().start()
 
