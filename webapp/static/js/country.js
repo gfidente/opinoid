@@ -28,7 +28,7 @@ $("#searchfield").keyup(function(event) {
   var text = $('#searchfield').val();
   if (text.length >= 3) {
     $("#allbtn").button('toggle');
-    var found = articles.filter(':containsi('.concat(text).concat(');'));
+    var found = articles.filter('article:containsi("'.concat(text, '")'));
     $('#filterwarning').show();
     $('#articleslist').empty();
     $('#articleslist').append(found);
