@@ -22,10 +22,10 @@ from textile import textile_restricted
 
 # tornado options
 from tornado.options import define, options
-define("dbhost", default="localhost", help="DB host")
-define("dbport", default="27017", help="DB port")
-define("dbuser", default="", help="DB user")
-define("dbpass", default="", help="DB pass")
+define("db_host", default="localhost", help="DB host")
+define("db_port", default="27017", help="DB port")
+define("db_user", default="", help="DB user")
+define("db_pass", default="", help="DB pass")
 
 
 class ArticleModule(tornado.web.UIModule):
@@ -256,6 +256,7 @@ def main():
  address = "0.0.0.0"
  port = 8888
  http_server.listen(port, address=address)
+ print "Listening on %s:%s" % (address, port)
  tornado.ioloop.IOLoop.instance().start()
 
 
