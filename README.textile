@@ -38,10 +38,10 @@ Options:
 include the port number)
   --log_to_stderr                  Send log output to stderr (colorized if possible). By default use stderr if --log_file_prefix is not set and no other logging is configured.
   --logging=info|warning|error|none Set the Python log level. If 'none', tornado won't touch the logging configuration.
-  --dbhost                         DB host
-  --dbpass                         DB pass
-  --dbport                         DB port
-  --dbuser                         DB user
+  --db_host                        DB host
+  --db_pass                        DB pass
+  --db_port                        DB port
+  --db_user                        DB user
 </pre>
 
 p. You will need to run such a *populate.py* script at least once, before starting the web app, to populate the db. We suggest you to set a cronjob to spawn it hourly.
