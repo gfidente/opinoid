@@ -1,4 +1,10 @@
 # www.robotstxt.org
 # http://code.google.com/web/controlcrawlindex
+User-agent: Googlebot
+Disallow: /logout*
+Disallow: /login*
+Disallow: /vote/add
+Disallow: /comment/add
 
 User-agent: *
+Allow: /
