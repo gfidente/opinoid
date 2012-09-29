@@ -27,15 +27,15 @@ function timeandtips(where) {
 }
 
 function clear_search_box() {
-    var text = $('#searchfield').val('');
-    restore_all_articles_view();
+  var text = $('#searchfield').val('');
+  restore_all_articles_view();
 }
 
 // add :containsi for case insensitive :contains
-$.extend($.expr[':'], {
-    'containsi': function(elem, i, match, array) {
-	return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-    }
+jQuery.expr[":"].containsi = jQuery.expr.createPseudo(function(arg) {
+  return function( elem ) {
+    return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+  };
 });
 
 // disables enter key in the searchfield
