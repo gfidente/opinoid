@@ -26,12 +26,12 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 import argparse
 
 
-def main(dbhost, dbport, dbuser, dbpass):
+def main(db_host, db_port, db_user, db_pass):
  wtin = int(time())
  logging.info("current time %s", wtin)
- connection = Connection(dbhost, dbport)
+ connection = Connection(db_host, db_port)
  db = connection.opinoid
- db.authenticate(dbuser, dbpass)
+ db.authenticate(db_user, db_pass)
  populate(db, wtin)
  cleanup(db, wtin)
  logrun(db, wtin)
@@ -125,9 +125,9 @@ def cleanup(db, wtin):
 
 if __name__ == "__main__":
  parser = argparse.ArgumentParser()
- parser.add_argument("--db_host", dest="dbhost", action='store', default="localhost", help="DB host")
- parser.add_argument("--db_port", dest="dbport", action='store', default=27017, help="DB host")
- parser.add_argument("--db_user", dest="dbuser", action='store', default="", help="DB host")
- parser.add_argument("--db_pass", dest="dbpass", action='store', default="", help="DB host")
+ parser.add_argument("--db_host", dest="db_host", action='store', default="localhost", help="DB host")
+ parser.add_argument("--db_port", dest="db_port", action='store', default=27017, help="DB host")
+ parser.add_argument("--db_user", dest="db_user", action='store', default="", help="DB host")
+ parser.add_argument("--db_pass", dest="db_pass", action='store', default="", help="DB host")
  args = parser.parse_args()
- main(args.dbhost, int(args.dbport), args.dbuser, args.dbpass)
+ main(args.db_host, int(args.db_port), args.db_user, args.db_pass)

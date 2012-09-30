@@ -56,7 +56,7 @@ class PaginationModule(tornado.web.UIModule):
 class BaseHandler(tornado.web.RequestHandler):
  @property
  def mongoworker(self):
-  return db.MongoWorker(options.dbhost, int(options.dbport), options.dbuser, options.dbpass)
+  return db.MongoWorker(options.db_host, int(options.db_port), options.db_user, options.db_pass)
 
  def get_current_user(self):
   user_oid = self.get_secure_cookie("useroid")

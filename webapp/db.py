@@ -17,10 +17,10 @@ categories = ["frontpage", "economy", "technology", "culture", "sport"]
 
 
 class MongoWorker:
- def __init__(self, dbhost, dbport, dbuser, dbpass):
-  mongo = Connection(dbhost, dbport, max_pool_size=8)
+ def __init__(self, db_host, db_port, db_user, db_pass):
+  mongo = Connection(db_host, db_port, max_pool_size=8)
   self.db = mongo.opinoid
-  self.db.authenticate(dbuser, dbpass)
+  self.db.authenticate(db_user, db_pass)
 
  def __get_hotness(self, time, score, score_update):
   # implements N(t) = N(0) * e ^ (-t/theta)
