@@ -125,9 +125,9 @@ def cleanup(db, wtin):
 
 if __name__ == "__main__":
  parser = argparse.ArgumentParser()
- parser.add_argument("--dbhost", dest="dbhost", action='store', default="localhost", help="DB host")
- parser.add_argument("--dbport", dest="dbport", action='store', default=27017, help="DB host")
- parser.add_argument("--dbuser", dest="dbuser", action='store', default="", help="DB host")
- parser.add_argument("--dbpass", dest="dbpass", action='store', default="", help="DB host")
+ parser.add_argument("--db_host", dest="dbhost", action='store', default="localhost", help="DB host")
+ parser.add_argument("--db_port", dest="dbport", action='store', default=27017, help="DB host")
+ parser.add_argument("--db_user", dest="dbuser", action='store', default="", help="DB host")
+ parser.add_argument("--db_pass", dest="dbpass", action='store', default="", help="DB host")
  args = parser.parse_args()
  main(args.dbhost, int(args.dbport), args.dbuser, args.dbpass)
