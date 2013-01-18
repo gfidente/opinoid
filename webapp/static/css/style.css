@@ -1,11 +1,7 @@
 /* Custom
 -------------------------------------------------- */
 
-body { padding-top: 40px; padding-bottom: 40px; font-family: Quantico; }
-
-p { font-family: Quantico; }
-
-input,button,select,textarea{ font-family: Quantico; }
+body { padding-top: 40px; padding-bottom: 40px; }
 
 textarea { resize: vertical; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
 
@@ -30,6 +26,7 @@ img.sourcelogo { max-width: 112px; max-height: 32px; }
 /* Hacking bootstrap
 -------------------------------------------------- */
 
+/* We don't want this when using the 'Journal' bootstrap theme
 .navbar .nav > li > span.likea {
  float: none;
  padding: 10px 0px 11px;
@@ -39,3 +36,4 @@ img.sourcelogo { max-width: 112px; max-height: 32px; }
  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
  display: block;
 }
+*/
