@@ -96,7 +96,7 @@ class FacebookHandler(BaseHandler, tornado.auth.FacebookGraphMixin):
  @tornado.web.asynchronous
  def get(self):
   self.fromurl = self.get_argument("fromurl", default="/")
-  redirect_uri = self.request.protocol + '://' + self.request.host + '/' + self.fromurl
+  redirect_uri = self.request.protocol + '://' + self.request.host + '/'
   if self.fromurl != "/" : redirect_uri = redirect_uri + self.fromurl
   if self.get_argument("code", False):
    self.get_authenticated_user(redirect_uri, client_id=self.settings["facebook_api_key"], client_secret=self.settings["facebook_secret"], code=self.get_argument("code"), callback=self.async_callback(self._on_auth))
