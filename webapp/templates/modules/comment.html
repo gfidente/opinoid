@@ -20,7 +20,6 @@
      <small>
       by <a rel="tooltip" href="/user/{{ comment["submitter"] }}" title="Brings you to the user's stats page">{{ comment["user_name"] }}</a> <time class="timeago" datetime="{{ comment["updated_iso8601"] }}">timeago</time> /
       {% if not cite %}
-       {% if comment.has_key("user_profile_url") %}<a rel="tooltip" href="{{ comment["user_profile_url"] }}" title="Open Facebook or Google public profile in a new tab" target="_blank">public profile</a> /{% end %}
        <a rel="tooltip" href="javascript:toggleReply('{{ comment["_id"] }}')" title="Post a reply to this comment">reply</a>
       {% else %}
        on <a rel="tooltip" href="/article/{{ comment["article_oid"] }}" title="Follow discussion in a new tab">{{ handler.mongoworker.get_article_by_oid(comment["article_oid"])["title"] }}</a>

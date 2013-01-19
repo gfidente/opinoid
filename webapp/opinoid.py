@@ -74,7 +74,7 @@ class GoogleHandler(BaseHandler, tornado.auth.GoogleMixin):
  @tornado.web.asynchronous
  def get(self):
   self.fromurl = self.get_argument("fromurl", default="/")
-  if self.get_argument("openid.mode", None):
+  if self.get_argument("openid.mode", False):
    self.get_authenticated_user(self.async_callback(self._on_auth))
    return
   self.authenticate_redirect()
@@ -92,22 +92,25 @@ class GoogleHandler(BaseHandler, tornado.auth.GoogleMixin):
   self.redirect(self.fromurl)
 
 
-class FacebookHandler(BaseHandler, tornado.auth.FacebookMixin):
+class FacebookHandler(BaseHandler, tornado.auth.FacebookGraphMixin):
  @tornado.web.asynchronous
  def get(self):
   self.fromurl = self.get_argument("fromurl", default="/")
-  if self.get_argument("session", None):
-   self.get_authenticated_user(self.async_callback(self._on_auth))
+  redirect_uri = self.request.protocol + '://' + self.request.host + '/' + self.fromurl
+  if self.fromurl != "/" : redirect_uri = redirect_uri + self.fromurl
+  if self.get_argument("code", False):
+   self.get_authenticated_user(redirect_uri, client_id=self.settings["facebook_api_key"], client_secret=self.settings["facebook_secret"], code=self.get_argument("code"), callback=self.async_callback(self._on_auth))
    return
-  self.authenticate_redirect()
+  self.authorize_redirect(redirect_uri, client_id=self.settings["facebook_api_key"], extra_params={"scope": "email"})
 
  def _on_auth(self, user):
   if not user:
    raise tornado.web.HTTPError(500, "Facebook auth failed")
+  print user
   opinoiduser = {}
   opinoiduser["first_name"] = user["first_name"]
   opinoiduser["last_name"] = user["last_name"]
-  opinoiduser["profile_url"] = user["profile_url"]
+  opinoiduser["email"] = user["email"]
   opinoiduser["provider"] = "facebook"
   user_oid = self.mongoworker.update_users_collection(opinoiduser)
   self.set_secure_cookie("useroid", user_oid)

@@ -139,8 +139,6 @@ class MongoWorker:
   entry["hotness"] = self.__get_hotness(wtin, entry["score"], entry["score_updated"])
   user = self.get_user_by_oid(entry["submitter"])
   entry["user_name"] = user["first_name"] + " " + user["last_name"]
-  if "profile_url" in user.keys():
-   entry["user_profile_url"] = user["profile_url"]
   return entry
 
  def __thread_comments_with_replies(self, parent_oid, collection):
@@ -210,7 +208,7 @@ class MongoWorker:
   if user["provider"] == "google":
    userondb = users.find_one({"email": user["email"]})
   elif user["provider"] == "facebook":
-   userondb = users.find_one({"user_profile_url": user["profile_url"]})
+   userondb = users.find_one({"email": user["email"]})
   if userondb:
    userondb["lastlogin"] = wtin
    users.save(userondb)
