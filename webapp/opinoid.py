@@ -98,7 +98,7 @@ class FacebookHandler(BaseHandler, tornado.auth.FacebookGraphMixin):
   self.fromurl = self.get_argument("fromurl", default="/")
   redirect_uri = self.request.protocol + '://' + self.request.host + '/login/facebook'
   if self.get_argument("code", False):
-   self.get_authenticated_user(redirect_uri, client_id=self.settings["facebook_api_key"], client_secret=self.settings["facebook_secret"], code=self.get_argument("code"), callback=self.async_callback(self._on_auth), extra_fields={"email"})
+   self.get_authenticated_user(redirect_uri, client_id=self.settings["facebook_api_key"], client_secret=self.settings["facebook_secret"], code=self.get_argument("code"), callback=self.async_callback(self._on_auth), extra_fields=["email"])
    return
   self.authorize_redirect(redirect_uri, client_id=self.settings["facebook_api_key"], extra_params={"scope": "email"})
 
